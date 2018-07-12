@@ -132,15 +132,21 @@ class KlarnaOrderTest extends ModuleUnitTestCase
     public function testValidateOrder($paymentId, $expectedResult)
     {
         /** @var \OxidEsales\Eshop\Application\Model\Basket $oBasket */
-        $oBasket = $this->prepareBasketWithProduct();
-        $oUser = oxNew(User::class);
-        $oBasket->setPayment($paymentId);
+        $basket = $this->prepareBasketWithProduct();
+        $basket->setShipping('oxidstandard');
+        $basket->setPayment($paymentId);
+
+        $group = $this->getMock(\OxidEsales\Eshop\Application\Model\Groups::class, array("getId"));
+        $group->expects($this->any())->method('getId')->will($this->returnValue("oxidgoodcust"));
+
+        $user = $this->getMock(\OxidEsales\Eshop\Application\Model\User::class, array("getUserGroups"));
+        $user->expects($this->any())->method('getUserGroups')->will($this->returnValue(array($group)));
 
         $order = oxNew(Order::class);
-        $result = $order->validateOrder($oBasket, $oUser);
+        $order->setUser($user);
+        $result = $order->validateOrder($basket, $user);
 
         $this->assertEquals($expectedResult, $result);
-
     }
 
     public function isKlarnaOrderDataProvider()
