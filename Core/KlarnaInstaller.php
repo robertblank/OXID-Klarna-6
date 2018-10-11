@@ -415,7 +415,7 @@ class KlarnaInstaller extends ShopConfiguration
      */
     protected function addActions()
     {
-        $shopId = $this->getConfig()->getShopId();
+        $shopId = \OxidEsales\Eshop\Core\Registry::getConfig()->getShopId();
         // Klarna Teaser
         $oxId             = 'klarna_teaser_' . $shopId;
         $sTitle           = 'Klarna Teaser';

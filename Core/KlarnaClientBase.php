@@ -190,10 +190,10 @@ abstract class KlarnaClientBase extends Base
         $php    = phpversion();
         $phpVer = 'PHP' . $php;
 
-        $shopName = self::$instance->getConfig()->getActiveShop()->oxshops__oxname->value;
+        $shopName = self::$instance->getDeleteMeConfig()->getActiveShop()->oxshops__oxname->value;
 
-        $shopEdition = self::$instance->getConfig()->getActiveShop()->oxshops__oxedition->value;
-        $shopRev     = self::$instance->getConfig()->getActiveShop()->oxshops__oxversion->value;
+        $shopEdition = self::$instance->getDeleteMeConfig()->getActiveShop()->oxshops__oxedition->value;
+        $shopRev     = self::$instance->getDeleteMeConfig()->getActiveShop()->oxshops__oxversion->value;
         $shopVer     = 'OXID_' . $shopEdition . '_' . $shopRev;
 
         $module = oxNew(Module::class);

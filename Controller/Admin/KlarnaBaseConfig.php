@@ -137,7 +137,7 @@ class KlarnaBaseConfig extends ShopConfiguration
         $sql = "DELETE 
                 FROM oxconfig
                 WHERE oxvarname IN ('" . implode("','", $aKeys) . "')
-                AND oxshopid = '{$this->getConfig()->getShopId()}'";
+                AND oxshopid = '{\OxidEsales\Eshop\Core\Registry::getConfig()->getShopId()}'";
 
         return $db->execute($sql);
     }
